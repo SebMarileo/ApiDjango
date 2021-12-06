@@ -20,19 +20,19 @@ class PersonaViewCreateSet(generics.CreateAPIView):
     serializer_class = PersonaSerializers
 
 # Views Profesor
-class ProfesorViewSet(generics.ListAPIView):
-    queryset = Profesor.objects.all()
-    serializer_class = ProfesorSerializers
+#class ProfesorViewSet(generics.ListAPIView):
+#    queryset = Profesor.objects.all()
+#    serializer_class = ProfesorSerializers
 
-class ProfesorBuscarViewSet(generics.ListAPIView):
-    serializer_class = ProfesorSerializers
-    def get_queryset(self):
-        elrut=self.kwargs["rut"] 
-        return Profesor.objects.filter(rut=elrut)
+#class ProfesorBuscarViewSet(generics.ListAPIView):
+#    serializer_class = ProfesorSerializers
+#    def get_queryset(self):
+#        elrut=self.kwargs["rut"] 
+#        return Profesor.objects.filter(rut=elrut)
 
-class ProfesorViewCreateSet(generics.CreateAPIView):
-    queryset = Profesor.objects.all()
-    serializer_class = ProfesorSerializers
+#class ProfesorViewCreateSet(generics.CreateAPIView):
+#    queryset = Profesor.objects.all()
+#    serializer_class = ProfesorSerializers
 
 # Views Alumno
 class AlumnoViewSet(generics.ListAPIView):
@@ -78,3 +78,32 @@ class AsistenciaBuscarViewSet(generics.ListAPIView):
 class AsistenciaViewCreateSet(generics.CreateAPIView):
     queryset = Asistencia.objects.all()
     serializer_class = AsistenciaSerializers
+
+########################################################################
+from django.views.decorators.csrf import csrf_exempt
+from django.http.response import JsonResponse 
+from rest_framework.parsers import JSONParser
+
+@csrf_exempt
+def ProfesorAPI(request,id=0):
+    if request.method=='POST':
+        Profesores = Profesor.objects.all()
+        prof_serializer = ProfesorSerializers(Profesores,many=True)
+        return JsonResponse(prof_serializer.data,safe=False)
+    return JsonResponse("no hay metodo",safe=False)
+
+@csrf_exempt
+def AlumnoAPI(request,id=0):
+    if request.method=='POST':
+        Alumnos = Alumno.objects.all()
+        alum_serializer = AlumnoSerializers(Alumnos,many=True)
+        return JsonResponse(alum_serializer.data,safe=False)
+    return JsonResponse("no hay metodo",safe=False)
+
+@csrf_exempt
+def AsistenciaAPI(request,id=0):
+    if request.method=='POST':
+        Asistencias = Asistencia.objects.all()
+        asis_serializer = AsistenciaSerializers(Asistencias,many=True)
+        return JsonResponse(asis_serializer.data,safe=False)
+    return JsonResponse("no hay metodo",safe=False)

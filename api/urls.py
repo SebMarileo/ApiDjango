@@ -1,25 +1,25 @@
 from django import urls
 from rest_framework import urlpatterns
 from django.conf.urls import url
-from .views import AlumnoBuscarViewSet, AlumnoViewCreateSet, AlumnoViewSet, PersonasViewSet, PersonaBuscarViewSet, PersonaViewCreateSet, CursosViewSet, CursosBuscarViewSet, CursosViewCreateSet, AsistenciaViewSet, AsistenciaBuscarViewSet, AsistenciaViewCreateSet, ProfesorBuscarViewSet, ProfesorViewCreateSet, ProfesorViewSet
+from api import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns =[
-    url(r'^api/persona/$',PersonasViewSet.as_view()),  
-    url(r'^api/buscar_persona/(?P<rut>.+)/$',PersonaBuscarViewSet.as_view()),
-    url(r'^api/crear_persona/$',PersonaViewCreateSet.as_view()),  
-    url(r'^api/cursos/$',CursosViewSet.as_view()), 
-    url(r'^api/buscar_cursos/(?P<id>.+)/$',CursosBuscarViewSet.as_view()), 
-    url(r'^api/crear_cursos/$',CursosViewCreateSet.as_view()),
-    url(r'^api/asistencia/$',AsistenciaViewSet.as_view()), 
-    url(r'^api/buscar_asistencia/(?P<id>.+)/$',AsistenciaBuscarViewSet.as_view()), 
-    url(r'^api/crear_asistencia/$',AsistenciaViewCreateSet.as_view()), 
-    url(r'^api/profesor/$',ProfesorViewSet.as_view()), 
-    url(r'^api/buscar_profesor/(?P<rut>.+)/$',ProfesorBuscarViewSet.as_view()), 
-    url(r'^api/crear_profesor/$',ProfesorViewCreateSet.as_view()), 
-    url(r'^api/alumno/$',AlumnoViewSet.as_view()), 
-    url(r'^api/buscar_alumno/(?P<rut>.+)/$',AlumnoBuscarViewSet.as_view()), 
-    url(r'^api/crear_alumno/$',AlumnoViewCreateSet.as_view()),    
+    url(r'^api/persona/$',views.PersonasViewSet.as_view()),  
+    url(r'^api/buscar_persona/(?P<rut>.+)/$',views.PersonaBuscarViewSet.as_view()),
+    url(r'^api/crear_persona/$',views.PersonaViewCreateSet.as_view()),  
+    url(r'^api/cursos/$',views.CursosViewSet.as_view()), 
+    url(r'^api/buscar_cursos/(?P<id>.+)/$',views.CursosBuscarViewSet.as_view()), 
+    url(r'^api/crear_cursos/$',views.CursosViewCreateSet.as_view()),
+    url(r'^api/asistencia/$',views.AsistenciaViewSet.as_view()), 
+    url(r'^api/buscar_asistencia/(?P<id>.+)/$',views.AsistenciaBuscarViewSet.as_view()), 
+    url(r'^api/crear_asistencia/$',views.AsistenciaViewCreateSet.as_view()), 
+    url(r'^api/profesor/$',views.ProfesorAPI), 
+    #url(r'^api/buscar_profesor/(?P<rut>.+)/$',views.ProfesorBuscarViewSet.as_view()), 
+    #url(r'^api/crear_profesor/$',views.ProfesorViewCreateSet.as_view()), 
+    url(r'^api/alumno/$',views.AlumnoViewSet.as_view()), 
+    url(r'^api/buscar_alumno/(?P<rut>.+)/$',views.AlumnoBuscarViewSet.as_view()), 
+    url(r'^api/crear_alumno/$',views.AlumnoViewCreateSet.as_view()),    
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
